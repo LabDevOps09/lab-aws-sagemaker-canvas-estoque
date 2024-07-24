@@ -1,47 +1,99 @@
-# 📊 Previsão de Estoque Inteligente na AWS com [SageMaker Canvas](https://aws.amazon.com/pt/sagemaker/canvas/)
+# 📊 Relatório de Projeto de Machine Learning com AWS SageMaker Canvas
 
-Bem-vindo ao desafio de projeto "Previsão de Estoque Inteligente na AWS com SageMaker Canvas. Neste Lab DIO, você aprenderá a usar o SageMaker Canvas para criar previsões de estoque baseadas em Machine Learning (ML). Siga os passos abaixo para completar o desafio!
+## Introdução 🤔
+Olá, este é o relatório do meu projeto de Machine Learning utilizando a plataforma AWS SageMaker Canvas, que permite criar modelos de aprendizado de máquina sem a necessidade de codificação. O objetivo deste projeto foi prever a demanda de produtos em estoque com base em um conjunto de dados fornecido.
 
-## 📋 Pré-requisitos
+## 1. Selecionando Dataset
 
-Antes de começar, certifique-se de ter uma conta na AWS. Se precisar de ajuda para criar sua conta, confira nosso repositório [AWS Cloud Quickstart](https://github.com/digitalinnovationone/aws-cloud-quickstart).
+### Descrição do Conjunto de Dados
+O conjunto de dados utilizado contém informações detalhadas sobre o estoque e as vendas de produtos. O dataset possui as seguintes colunas:
+
+- **item_id**: Identificação do produto
+- **Location**: Localização
+- **time_stamp**: Data
+- **demand**: Demanda do produto
+- **price**: Preço do produto
+- **Product_category**: Categoria do produto
+
+## 2. Treinando Dataset
+
+### Análise das Métricas de Performance
+Após o treinamento do modelo no SageMaker Canvas, as métricas de performance foram as seguintes:
+
+- **Métrica de otimização (accuracy)**: 97.650%
+- **Média do F1 Score**: 97.568%
+- **Média de precisão (precision)**: 97.712%
+- **Média de recall**: 97.650%
+- **Perda de validação (validation loss)**: 0.085
+
+### Colunas Mais Influentes
+As colunas que mais influenciam as previsões foram identificadas como:
+
+- **price**: 34.289%
+- **Product_category**: 30.178%
+- **demand**: 25.094%
+- **time_stamp**: 7.439%
+- **Location**: 3.000%
+
+## 3. Prevendo Valores
+
+### Previsão
+
+Utilizei o modelo treinado para prever a demanda de estoque. Abaixo estão as principais observações a partir das previsões geradas:
+
+- **Impacto do preço na previsão de item_id**
+
+![image](https://github.com/user-attachments/assets/d9f8194d-101d-4b73-a120-1aac004ef5c0)
+
+- **Predições vs. Valores Reais**
+
+![image](https://github.com/user-attachments/assets/e88d78be-b8b0-4b80-aa16-a2a585398606)
 
 
-## 🎯 Objetivos Deste Desafio de Projeto (Lab)
 
-![image](https://github.com/digitalinnovationone/lab-aws-sagemaker-canvas-estoque/assets/730492/72f5c21f-5562-491e-aa42-2885a3184650)
+### Conclusões e Insights
+- **Impacto do Preço**: O preço mostrou ser a característica mais importante para o modelo, influenciando significativamente as previsões de demanda.
 
-- Dê um fork neste projeto e reescreva este `README.md`. Sinta-se à vontade para detalhar todo o processo de criação do seu Modelo de ML para uma "Previsão de Estoque Inteligente".
-- Para isso, siga o [passo a passo] descrito a seguir e evolua as suas habilidades em ML no-code com o Amazon SageMaker Canvas.
-- Ao concluir, envie a URL do seu repositório com a solução na plataforma da DIO.
+- **Desempenho do Modelo**: O modelo teve um desempenho robusto, com uma precisão média superior a 97%. Isso demonstra que o modelo é confiável para prever a demanda de estoque.
 
+- **Distribuição das Predições**: As visualizações mostraram que o modelo conseguiu capturar a maioria das tendências de demanda, com algumas discrepâncias menores entre previsões e valores reais.
 
-## 🚀 Passo a Passo
+## 4. Realizando Previsões
 
-### 1. Selecionar Dataset
+### Dados de Entrada Utilizados
+Para testar o modelo, utilizei os seguintes dados de entrada:
 
--   Navegue até a pasta `datasets` deste repositório. Esta pasta contém os datasets que você poderá escolher para treinar e testar seu modelo de ML. Sinta-se à vontade para gerar/enriquecer seus próprios datasets, quanto mais você se engajar, mais relevante esse projeto será em seu portfólio.
--   Escolha o dataset que você usará para treinar seu modelo de previsão de estoque.
--   Faça o upload do dataset no SageMaker Canvas.
+| Coluna              | Valor              |
+|---------------------|--------------------|
+| Location            | Seattle            |
+| time_stamp          | 01/10/2024 12:00 am|
+| demand              | 235.9              |
+| price               | 103                |
+| Product_category    | Appliances         |
 
-### 2. Construir/Treinar
+Esses dados foram inseridos na ferramenta de previsão do AWS SageMaker Canvas para gerar previsões específicas.
 
--   No SageMaker Canvas, importe o dataset que você selecionou.
--   Configure as variáveis de entrada e saída de acordo com os dados.
--   Inicie o treinamento do modelo. Isso pode levar algum tempo, dependendo do tamanho do dataset.
+### Resultados das Previsões
+O modelo gerou as seguintes previsões de demanda para diferentes `item_id`:
 
-### 3. Analisar
+| item_id | Prediction (%) |
+|---------|----------------|
+| sku-090 | 55.234         |
+| sku-079 | 4.210          |
+| sku-183 | 6.845          |
+| sku-146 | 4.112          |
+| sku-041 | 3.978          |
 
--   Após o treinamento, examine as métricas de performance do modelo.
--   Verifique as principais características que influenciam as previsões.
--   Faça ajustes no modelo se necessário e re-treine até obter um desempenho satisfatório.
+**Insight Principal**: O `sku-090` apresentou a maior probabilidade de demanda, com 55.234%, indicando que é o item mais provável de ser demandado com base nos dados fornecidos.
 
-### 4. Prever
+## Análise dos Resultados
 
--   Use o modelo treinado para fazer previsões de estoque.
--   Exporte os resultados e analise as previsões geradas.
--   Documente suas conclusões e qualquer insight obtido a partir das previsões.
+### Impacto do Preço na Predição do item_id
+A análise visual revelou que o preço tem um impacto significativo nas previsões. O gráfico mostra como a variação do preço influencia a demanda prevista para o item_id específico.
 
-## 🤔 Dúvidas?
+### Comparação entre Valores Previstos e Reais
+A comparação entre as previsões e os valores reais mostrou que o modelo conseguiu prever a demanda com uma boa precisão, embora algumas variações menores possam ser observadas.
 
-Esperamos que esta experiência tenha sido enriquecedora e que você tenha aprendido mais sobre Machine Learning aplicado a problemas reais. Se tiver alguma dúvida, não hesite em abrir uma issue neste repositório ou entrar em contato com a equipe da DIO.
+## Considerações Finais
+A previsão de demanda utilizando o AWS SageMaker Canvas mostrou-se eficaz. O item `sku-090` foi identificado como o mais provável de ser demandado, o que pode ajudar na otimização do estoque e nas estratégias de marketing. Estou satisfeito com os resultados alcançados e ansioso para continuar explorando e aprimorando minhas habilidades em Machine Learning. Este projeto foi uma excelente oportunidade para aplicar conceitos teóricos em uma plataforma prática e poderosa como o AWS SageMaker Canvas.
+
